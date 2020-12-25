@@ -29,6 +29,10 @@ class atm:
     TopFrame2Right.grid(row = 0, column = 2, padx = 8)
     #==============================================================================
 
+    # def enter_Pin():
+    #   pinNo = self.txtReceipt.get('1.0', 'end-1c')
+
+    #==============================================================================
     self.txtReceipt = Text(TopFrame2Mid, height=17, width=42, bd=12, font=('arial', 9, 'bold'))
     self.txtReceipt.grid(row = 0, column = 0)
     #==============================================================================
@@ -76,6 +80,30 @@ class atm:
     
     self.imgCL = PhotoImage(file='icons/clear.png')
     self.btnCL = Button(TopFrame1, width=160, height=60, image=self.imgCL).grid(row = 3, column = 3, padx = 2, pady = 4)
+    
+    self.img7 = PhotoImage(file='icons/seven.png')
+    self.btn7 = Button(TopFrame1, width=160, height=60, image=self.img7).grid(row = 4, column = 0, padx = 2, pady = 4)
+
+    self.img8 = PhotoImage(file='icons/eight.png')
+    self.btn8 = Button(TopFrame1, width=160, height=60, image=self.img8).grid(row = 4, column = 1, padx = 2, pady = 4)
+    
+    self.img9 = PhotoImage(file='icons/nine.png')
+    self.btn9 = Button(TopFrame1, width=160, height=60, image=self.img9).grid(row = 4, column = 2, padx = 2, pady = 4)
+    
+    self.imgEnter = PhotoImage(file='icons/enter.png')
+    self.btnEnter = Button(TopFrame1, width=160, height=60, image=self.imgEnter).grid(row = 4, column = 3, padx = 2, pady = 4)
+    
+    self.imgSp1 = PhotoImage(file='icons/empty.png')
+    self.btnSp1 = Button(TopFrame1, width=160, height=60, image=self.imgSp1).grid(row = 5, column = 0, padx = 2, pady = 4)
+
+    self.img0 = PhotoImage(file='icons/zero.png')
+    self.btn0 = Button(TopFrame1, width=160, height=60, image=self.img0).grid(row = 5, column = 1, padx = 2, pady = 4)
+    
+    self.imgSp2 = PhotoImage(file='icons/empty.png')
+    self.btnSp2 = Button(TopFrame1, width=160, height=60, image=self.imgSp2).grid(row = 5, column = 2, padx = 2, pady = 4)
+    
+    self.imgSp3 = PhotoImage(file='icons/empty.png')
+    self.btnSp3 = Button(TopFrame1, width=160, height=60, image=self.imgSp3).grid(row = 5, column = 3, padx = 2, pady = 4)
 
 
 if __name__=='__main__':
