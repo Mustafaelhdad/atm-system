@@ -29,8 +29,31 @@ class atm:
     TopFrame2Right.grid(row = 0, column = 2, padx = 8)
     #==============================================================================
 
-    # def enter_Pin():
-    #   pinNo = self.txtReceipt.get('1.0', 'end-1c')
+    def enter_Pin():
+      # pinNo = self.txtReceipt.get('1.0', 'end-1c')
+      # if(pinNo == str('2213') or pinNo == str('4323') or pinNo == str('5982')):
+      #   self.txtReceipt.delete('1.0', END)
+
+      #   self.txtReceipt.insert(END, '\t\t\t ATM' + '\n\n')
+      #   self.txtReceipt.insert(END, 'Withdraw Cash\t\t\t Loan' + '\n\n')
+      #   self.txtReceipt.insert(END, 'Cash with Receipt\t\t\t Deposit' + '\n\n')
+      #   self.txtReceipt.insert(END, 'Balance \t\t\t Request New Pin' + '\n\n')
+      #   self.txtReceipt.insert(END, 'Mini statemnet\t\t\t Print statemnet' + '\n\n')
+      self.btnArrowR1 = Button(TopFrame2Right, width=160, height=60, state=NORMAL, image=self.img_arrow_right).grid(row = 0, column = 0, padx = 2, pady = 4)
+    
+      self.btnArrowR2 = Button(TopFrame2Right, width=160, height=60, state=NORMAL, image=self.img_arrow_right).grid(row = 1, column = 0, padx = 2, pady = 4)
+    
+      self.btnArrowR3 = Button(TopFrame2Right, width=160, height=60, state=NORMAL, image=self.img_arrow_right).grid(row = 2, column = 0, padx = 2, pady = 4)
+    
+      self.btnArrowR4 = Button(TopFrame2Right, width=160, height=60, state=NORMAL, image=self.img_arrow_right).grid(row = 3, column = 0, padx = 2, pady = 4)
+
+      self.btnArrowL1 = Button(TopFrame2Left, width=160, height=60, state=NORMAL, image=self.img_arrow_left).grid(row = 0, column = 0, padx = 2, pady = 4)
+    
+      self.btnArrowL2 = Button(TopFrame2Left, width=160, height=60, state=NORMAL, image=self.img_arrow_left).grid(row = 1, column = 0, padx = 2, pady = 4)
+    
+      self.btnArrowL3 = Button(TopFrame2Left, width=160, height=60, state=NORMAL, image=self.img_arrow_left).grid(row = 2, column = 0, padx = 2, pady = 4)
+    
+      self.btnArrowL4 = Button(TopFrame2Left, width=160, height=60, state=NORMAL, image=self.img_arrow_left).grid(row = 3, column = 0, padx = 2, pady = 4)
 
     #==============================================================================
     self.txtReceipt = Text(TopFrame2Mid, height=17, width=42, bd=12, font=('arial', 9, 'bold'))
@@ -91,7 +114,7 @@ class atm:
     self.btn9 = Button(TopFrame1, width=160, height=60, image=self.img9).grid(row = 4, column = 2, padx = 2, pady = 4)
     
     self.imgEnter = PhotoImage(file='icons/enter.png')
-    self.btnEnter = Button(TopFrame1, width=160, height=60, image=self.imgEnter).grid(row = 4, column = 3, padx = 2, pady = 4)
+    self.btnEnter = Button(TopFrame1, width=160, height=60,command=enter_Pin, image=self.imgEnter).grid(row = 4, column = 3, padx = 2, pady = 4)
     
     self.imgSp1 = PhotoImage(file='icons/empty.png')
     self.btnSp1 = Button(TopFrame1, width=160, height=60, image=self.imgSp1).grid(row = 5, column = 0, padx = 2, pady = 4)
