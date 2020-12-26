@@ -40,7 +40,7 @@ class atm:
         self.txtReceipt.insert(END, 'Balance \t\t\t Request New Pin' + '\n\n\n\n')
         self.txtReceipt.insert(END, 'Mini statemnet\t\t\t Print statemnet' + '\n\n\n\n')
 
-        self.btnArrowR1 = Button(TopFrame2Right, width=160, height=60, state=NORMAL, image=self.img_arrow_right).grid(row = 0, column = 0, padx = 2, pady = 4)
+        self.btnArrowR1 = Button(TopFrame2Right, width=160, height=60, state=NORMAL, command=withdrawcash, image=self.img_arrow_right).grid(row = 0, column = 0, padx = 2, pady = 4)
     
         self.btnArrowR2 = Button(TopFrame2Right, width=160, height=60, state=NORMAL, image=self.img_arrow_right).grid(row = 1, column = 0, padx = 2, pady = 4)
     
@@ -48,7 +48,7 @@ class atm:
     
         self.btnArrowR4 = Button(TopFrame2Right, width=160, height=60, state=NORMAL, image=self.img_arrow_right).grid(row = 3, column = 0, padx = 2, pady = 4)
 
-        self.btnArrowL1 = Button(TopFrame2Left, width=160, height=60, state=NORMAL, image=self.img_arrow_left).grid(row = 0, column = 0, padx = 2, pady = 4)
+        self.btnArrowL1 = Button(TopFrame2Left, width=160, height=60, state=NORMAL, command=loan, image=self.img_arrow_left).grid(row = 0, column = 0, padx = 2, pady = 4)
     
         self.btnArrowL2 = Button(TopFrame2Left, width=160, height=60, state=NORMAL, image=self.img_arrow_left).grid(row = 1, column = 0, padx = 2, pady = 4)
     
@@ -60,6 +60,7 @@ class atm:
         self.txtReceipt.insert(END, 'Invalid Pin Number' + '\n\n')
 
     def clear():
+      self.txtReceipt.delete('1.0',END)
       self.btnArrowR1 = Button(TopFrame2Right, width=160, height=60, state=DISABLED, image=self.img_arrow_right).grid(row = 0, column = 0, padx = 2, pady = 4)
     
       self.btnArrowR2 = Button(TopFrame2Right, width=160, height=60, state=DISABLED, image=self.img_arrow_right).grid(row = 1, column = 0, padx = 2, pady = 4)
@@ -116,13 +117,31 @@ class atm:
       value9 = 9
       self.txtReceipt.insert(END, value9)
 
+    def cancel():
+      Cancel = tkinter.messagebox.askyesno("ATM", "Do you want to confirm cancel?")
+      if Cancel > 0:
+        self.root.destroy()
+        return
+
+    def withdrawcash():
+      enter_Pin()
+      self.txtReceipt.delete('1.0',END)
+      self.txtReceipt.focus_set()
+
+    def loan():
+      enter_Pin()
+      self.txtReceipt.delete('1.0',END)
+      self.txtReceipt.insert(END, 'Loan $ ')
+      self.txtReceipt.focus_set()
+
     #==============================================================================
     self.txtReceipt = Text(TopFrame2Mid, height=17, width=42, bd=12, font=('arial', 9, 'bold'))
     self.txtReceipt.grid(row = 0, column = 0)
     #==============================================================================
 
     self.img_arrow_left = PhotoImage(file='icons/lArrow.png')
-    self.btnArrowL1 = Button(TopFrame2Left, width=160, height=60, state=DISABLED, image=self.img_arrow_left).grid(row = 0, column = 0, padx = 2, pady = 4)
+
+    self.btnArrowL1 = Button(TopFrame2Left, width=160, height=60, state=DISABLED, command=loan, image=self.img_arrow_left).grid(row = 0, column = 0, padx = 2, pady = 4)
     
     self.btnArrowL2 = Button(TopFrame2Left, width=160, height=60, state=DISABLED, image=self.img_arrow_left).grid(row = 1, column = 0, padx = 2, pady = 4)
     
@@ -132,7 +151,8 @@ class atm:
     #==============================================================================
 
     self.img_arrow_right = PhotoImage(file='icons/rArrow.png')
-    self.btnArrowR1 = Button(TopFrame2Right, width=160, height=60, state=DISABLED, image=self.img_arrow_right).grid(row = 0, column = 0, padx = 2, pady = 4)
+
+    self.btnArrowR1 = Button(TopFrame2Right, width=160, height=60, state=DISABLED, command=withdrawcash, image=self.img_arrow_right).grid(row = 0, column = 0, padx = 2, pady = 4)
     
     self.btnArrowR2 = Button(TopFrame2Right, width=160, height=60, state=DISABLED, image=self.img_arrow_right).grid(row = 1, column = 0, padx = 2, pady = 4)
     
@@ -151,7 +171,7 @@ class atm:
     self.btn3 = Button(TopFrame1, width=160, height=60,command=insert3 , image=self.img3).grid(row = 2, column = 2, padx = 2, pady = 4)
     
     self.imgCE = PhotoImage(file='icons/cancel.png')
-    self.btn3 = Button(TopFrame1, width=160, height=60, image=self.imgCE).grid(row = 2, column = 3, padx = 2, pady = 4)
+    self.btn3 = Button(TopFrame1, width=160, height=60, command=cancel, image=self.imgCE).grid(row = 2, column = 3, padx = 2, pady = 4)
     
     self.img4 = PhotoImage(file='icons/four.png')
     self.btn4 = Button(TopFrame1, width=160, height=60,command=insert4 , image=self.img4).grid(row = 3, column = 0, padx = 2, pady = 4)
