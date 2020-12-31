@@ -1,7 +1,33 @@
 from tkinter import *
-
 from tkinter import ttk
 import tkinter.messagebox
+import sqlite3
+
+#create or connect database!!
+conn = sqlite3.connect('bank.db')
+
+#create cursor
+c = conn.cursor()
+
+#create table
+# c.execute("""CREATE TABLE clients (
+#   pin integer,
+#   balance integer
+# )""")
+
+#insert data into the db
+c.execute("INSERT INTO clients VALUES (:pin, :balance)"
+  {
+    'pin': pin.get(),
+    'balance': balance.get()
+  }
+)
+
+#commit changes
+conn.commit()
+
+#close db connection
+conn.close()
 
 class atm:
   def __init__(self, root):
@@ -142,23 +168,23 @@ class atm:
     def request_new_pin():
       enter_Pin()
       self.txtReceipt.delete('1.0', END)
-      self.txtReceipt.insert(END, '\t\tWelcome to iBank\n')
+      self.txtReceipt.insert(END, '\t\tWelcome to 7masa Bank\n')
       self.txtReceipt.insert(END, 'New pin number will be send to your email address\n')
       self.txtReceipt.insert(END, 'Withdraw Cash\t\t\t Loan' + '\n\n\n\n')
       self.txtReceipt.insert(END, 'Cash with Receipt\t\t\t Deposit' + '\n\n\n\n')
       self.txtReceipt.insert(END, 'Balance \t\t\t Request New Pin' + '\n\n\n\n')
       self.txtReceipt.insert(END, 'Mini statement\t\t\t Print statement' + '\n\n\n\n')
-      self.txtReceipt.insert(END, '\t\tThanks for using iBank\n')
+      self.txtReceipt.insert(END, '\t\tThanks for using 7masa Bank\n')
 
     def balance():
       self.txtReceipt.delete('1.0', END)
-      self.txtReceipt.insert(END, '\t\tWelcome to iBank\n')
+      self.txtReceipt.insert(END, '\t\tWelcome to 7masa Bank\n')
       self.txtReceipt.insert(END, '$767' + '\n')
       self.txtReceipt.insert(END, 'Withdraw Cash\t\t\t Loan' + '\n\n\n\n')
       self.txtReceipt.insert(END, 'Cash with Receipt\t\t\t Deposit' + '\n\n\n\n')
       self.txtReceipt.insert(END, 'Balance \t\t\t Request New Pin' + '\n\n\n\n')
       self.txtReceipt.insert(END, 'Mini statement\t\t\t Print statement' + '\n\n\n\n')
-      self.txtReceipt.insert('1.0', '\t\tThanks for using iBank\n')
+      self.txtReceipt.insert('1.0', '\t\tThanks for using 7masa Bank\n')
 
     def statement():
       pinNo1 = str(self.txtReceipt.get('1.0', 'end-1c'))
