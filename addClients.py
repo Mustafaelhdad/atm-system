@@ -1,8 +1,9 @@
 from tkinter import *
 import sqlite3
+from tkinter import messagebox
 
 conn = sqlite3.connect('bank.db')
-cur = conn.cursor()
+c = conn.cursor()
 
 class AddClients(Toplevel):
   def __init__(self):
@@ -37,5 +38,21 @@ class AddClients(Toplevel):
     self.ent_balance.place(x=150, y=80)
 
     #submit
-    button = Button(self.bottomFrame, text='Add Client')
+    button = Button(self.bottomFrame, text='Add Client', command=self.addClient)
     button.place(x=270, y=140)
+  
+  def addClient(self):
+    o_pin = self.ent_pin.get()
+    o_balance = self.ent_balance.get()
+
+    if(len(o_pin) == 3 ):
+      try:
+        query="INSERT INTO 'clients' (pin,balance) VALUES(?,?)"
+        c.execute(query,(o_pin, o_balance))
+        conn.commit()
+        messagebox.showinfo("Success","Successfully added to database!",icon='info')
+      except:
+        messagebox.showerror("Error", "Can't add to database!", icon='warning')
+
+    else:
+      messagebox.showerror("Error","PIN must be four numbers!",icon='warning')

@@ -25,10 +25,10 @@ c = conn.cursor()
 # )
 
 #commit changes
-conn.commit()
+# conn.commit()
 
 #close db connection
-conn.close()
+# conn.close()
 
 class atm(object):
 
