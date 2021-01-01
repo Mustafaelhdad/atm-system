@@ -2,6 +2,7 @@ from tkinter import *
 from tkinter import ttk
 import tkinter.messagebox
 import sqlite3
+import addClients
 
 #create or connect database!!
 conn = sqlite3.connect('bank.db')
@@ -16,12 +17,12 @@ c = conn.cursor()
 # )""")
 
 #insert data into the db
-c.execute("INSERT INTO clients VALUES (:pin, :balance)"
-  {
-    'pin': pin.get(),
-    'balance': balance.get()
-  }
-)
+# c.execute("INSERT INTO clients VALUES (:pin, :balance)"
+#   (
+#     'pin': pin.get(),
+#     'balance': balance.get()
+#   )
+# )
 
 #commit changes
 conn.commit()
@@ -29,7 +30,11 @@ conn.commit()
 #close db connection
 conn.close()
 
-class atm:
+class atm(object):
+
+  def func_addClient(self):
+    addpage=addClients.AddClients()
+
   def __init__(self, root):
     self.root = root
     self.root.title("ATM System")
@@ -268,8 +273,8 @@ class atm:
     self.imgSp2 = PhotoImage(file='icons/empty.png')
     self.btnSp2 = Button(TopFrame1, width=160, height=60, image=self.imgSp2).grid(row = 5, column = 2, padx = 2, pady = 4)
     
-    self.imgSp3 = PhotoImage(file='icons/empty.png')
-    self.btnSp3 = Button(TopFrame1, width=160, height=60, image=self.imgSp3).grid(row = 5, column = 3, padx = 2, pady = 4)
+    
+    self.btnSp3 = Button(TopFrame1, text='Add', command=self.func_addClient).grid(row = 5, column = 3, padx = 2, pady = 4)
 
 
 if __name__=='__main__':
