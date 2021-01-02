@@ -45,13 +45,14 @@ class atm(object):
     #==============================================================================
 
     def enter_Pin():
+      global pinNo
       pinNo = self.txtReceipt.get('1.0', 'end-1c')
-      c.execute("SELECT * FROM clients WHERE pin=?", (pinNo,))
+      result = c.execute("SELECT * FROM clients WHERE pin=?", (pinNo,))
       
-      result = c.fetchone()
+      client_info = result.fetchone()
 
-      self.pin = result[0]
-      self.balance = result[1]
+      self.pin = client_info[0]
+      self.balance = client_info[1]
 
       if(self.pin):
         self.txtReceipt.delete('1.0', END)
@@ -146,9 +147,14 @@ class atm(object):
         return
 
     def withdrawcash():
-      enter_Pin()
+      # enter_Pin()
       self.txtReceipt.delete('1.0',END)
       self.txtReceipt.focus_set()
+      self.txtReceipt.insert('1.0', self.balance)
+
+      withdrawMony = self.txtReceipt.get('1.0', 'end-1c')
+      balance = self.balance - int(withdrawMony)
+      result = c.execute("UPDATE clients SET balance=? WHERE pin=?", (balance, pinNo))
 
     def loan():
       enter_Pin()
