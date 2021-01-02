@@ -45,7 +45,7 @@ class AddClients(Toplevel):
     o_pin = self.ent_pin.get()
     o_balance = self.ent_balance.get()
 
-    if(len(o_pin) == 3 ):
+    if(len(str(o_pin)) == 4 ):
       try:
         query="INSERT INTO 'clients' (pin,balance) VALUES(?,?)"
         c.execute(query,(o_pin, o_balance))

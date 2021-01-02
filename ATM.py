@@ -6,23 +6,7 @@ import addClients
 
 #create or connect database!!
 conn = sqlite3.connect('bank.db')
-
-#create cursor
 c = conn.cursor()
-
-#create table
-# c.execute("""CREATE TABLE clients (
-#   pin integer,
-#   balance integer
-# )""")
-
-#insert data into the db
-# c.execute("INSERT INTO clients VALUES (:pin, :balance)"
-#   (
-#     'pin': pin.get(),
-#     'balance': balance.get()
-#   )
-# )
 
 #commit changes
 # conn.commit()
@@ -62,7 +46,14 @@ class atm(object):
 
     def enter_Pin():
       pinNo = self.txtReceipt.get('1.0', 'end-1c')
-      if(pinNo == str('2213') or pinNo == str('4323') or pinNo == str('5982')):
+      c.execute("SELECT * FROM clients WHERE pin=?", (pinNo,))
+      
+      result = c.fetchone()
+
+      self.pin = result[0]
+      self.balance = result[1]
+
+      if(self.pin):
         self.txtReceipt.delete('1.0', END)
 
         self.txtReceipt.insert(END, '\t\tATM' + '\n\n')
@@ -183,13 +174,9 @@ class atm(object):
 
     def balance():
       self.txtReceipt.delete('1.0', END)
-      self.txtReceipt.insert(END, '\t\tWelcome to 7masa Bank\n')
-      self.txtReceipt.insert(END, '$767' + '\n')
-      self.txtReceipt.insert(END, 'Withdraw Cash\t\t\t Loan' + '\n\n\n\n')
-      self.txtReceipt.insert(END, 'Cash with Receipt\t\t\t Deposit' + '\n\n\n\n')
-      self.txtReceipt.insert(END, 'Balance \t\t\t Request New Pin' + '\n\n\n\n')
-      self.txtReceipt.insert(END, 'Mini statement\t\t\t Print statement' + '\n\n\n\n')
-      self.txtReceipt.insert('1.0', '\t\tThanks for using 7masa Bank\n')
+      self.txtReceipt.insert(END, '\tWelcome to 7masa Bank\n')
+      self.txtReceipt.insert(END, f"\n\n\n\t\t${self.balance}" + '\n')
+      self.txtReceipt.insert('1.0', '\n             Thanks for using 7masa Bank\n')
 
     def statement():
       pinNo1 = str(self.txtReceipt.get('1.0', 'end-1c'))
